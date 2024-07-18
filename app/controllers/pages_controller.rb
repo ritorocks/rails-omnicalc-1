@@ -29,11 +29,11 @@ class PagesController < ApplicationController
   end
 
   def payment_results
-    @apr = params.fetch("user_apr").to_fs(:percentage, {:precision => 4})
+    @apr = params.fetch("user_apr").to_f
     rate = (@apr/100)/12
     @time = params.fetch("user_years").to_i
     term = @time * 12
-    @pv = params.fetch("user_pv").to_fs(:currency)
+    @pv = params.fetch("user_pv").to_f
 
     @num = rate * @pv
     @den = 1 - (1+rate) ** (-term)
